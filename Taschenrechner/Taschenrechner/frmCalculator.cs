@@ -109,6 +109,83 @@ namespace Taschenrechner
         {
 
         }
+
+        private bool CheckCalcArray(string[] arr)
+        {
+            //wenn nicht alle elemente zahlen der operatoren sind, wird false zurück gegeben
+            if (!arr.Any(x => IsNumber(x) || IsOperator(x)))
+                return false;
+
+            List<string> l = new List<string>(arr);
+
+            //doppelte Minus und plus Entfernen oder austauschen
+            for(int i = 0; i < l.Count; i++)
+            {
+                if(l[i] == "-")
+                {
+                    if (i < l.Count - 1)
+                    {
+                        if(l[i+1] == "-")
+                        {
+                            if (IsOperator(l[i - 1]))
+                            {
+                                l.RemoveAt(i);
+                                l.RemoveAt(i);
+                            }
+                            else
+                            {
+                                l.RemoveAt(i);
+                                l[i] = "+";
+                            }
+                        }
+                    }
+                }
+
+                if(l[i] == "+" && i > 0)
+                {
+                    if (IsOperator(l[i - 1]))
+                    {
+                        l.RemoveAt(i);
+                    }
+
+                }
+            }
+
+            if(l.First() == "-")
+            {
+                l.RemoveAt(0);
+                l[0] = "-" + l[0];
+            }
+
+            if (IsOperator(l.Last()))
+                return false;
+
+            //wenn nicht alle elemente zahlen der operatoren sind, wird false zurück gegeben
+            if (!arr.Any(x => IsNumber(x) || IsOperator(x)))
+                return false;
+
+            for (int i = 1; i < l.Count; i++)
+            {
+                if (IsOperator(l[i - 1]))
+                {
+                    if (IsOperator(l[i]))
+                    {
+
+                    }
+                }
+            }
+        }
+
+        private bool IsOperator(string s)
+        {
+            string[] ops = new string[] { "+", "-", "*", "/" };
+            return ops.Contains(s);
+        }
+
+        private bool IsNumber(string s)
+        {
+            return double.TryParse(s, out double d);
+        }
     }
 
 }

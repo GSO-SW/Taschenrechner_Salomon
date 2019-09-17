@@ -13,9 +13,9 @@ namespace Taschenrechner
 
         }
 
-        static int Add(int nOne, int nTwo)
-        {
-            return null;
-        }
+        //static int Add(int nOne, int nTwo)
+        //{
+        //    return null;
+        //}
     }
 }

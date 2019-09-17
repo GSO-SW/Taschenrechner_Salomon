@@ -22,6 +22,9 @@ namespace Taschenrechner
         }
         //Buttons
         #region Number and Operand Buttons
+
+            //Number Buttons
+
         private void btnZero_Click(object sender, EventArgs e)
         {
             tbxCalcString.Text += "0";
@@ -72,6 +75,8 @@ namespace Taschenrechner
             tbxCalcString.Text += "9";
         }
 
+            //Operand Buttons
+
         private void btnComma_Click(object sender, EventArgs e)
         {
             tbxCalcString.Text += ",";
@@ -103,11 +108,33 @@ namespace Taschenrechner
             tbxCalcString.Text += "-";
         }
 
+        private void btnSolve_Click(object sender, EventArgs e)
+        {
+            splitCalcString(tbxCalcString.Text);
+        }
         #endregion
+
+
+        private string[] splitCalcString(string calcString)
+        {
+            string[] calcArray = calcString.Split('+', '*', '-', '/');
+            //Debug
+            string debug = "";
+            for(int i=0;i < calcString.Length;i++)
+            {
+                debug += calcString[i];
+                debug += "|";
+            }
+            MessageBox.Show(debug);
+            return calcArray;
+        }
 
         private void tbxCalcString_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (e.KeyChar == (char)13)
+            {
+                splitCalcString(tbxCalcString.Text);
+            }
         }
     }
 

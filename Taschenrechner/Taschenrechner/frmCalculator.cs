@@ -18,9 +18,9 @@ namespace Taschenrechner
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-           tbxCalcString.Focus();
-        }
 
+        }
+        //Buttons
         #region Number and Operand Buttons
         private void btnZero_Click(object sender, EventArgs e)
         {
@@ -74,7 +74,7 @@ namespace Taschenrechner
 
         private void btnComma_Click(object sender, EventArgs e)
         {
-            tbxCalcString.Text += ".";
+            tbxCalcString.Text += ",";
         }
 
         private void btnCE_Click(object sender, EventArgs e)
@@ -83,12 +83,32 @@ namespace Taschenrechner
             tbxSolution.Text = "";
         }
 
+        private void btnDiv_Click(object sender, EventArgs e)
+        {
+            tbxCalcString.Text += "/";
+        }
+
+        private void btnMult_Click(object sender, EventArgs e)
+        {
+            tbxCalcString.Text += "*";
+        }
+
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+            tbxCalcString.Text += "+";
+        }
+
+        private void btnMinus_Click(object sender, EventArgs e)
+        {
+            tbxCalcString.Text += "-";
+        }
+
         #endregion
 
         private void tbxCalcString_KeyPress(object sender, KeyPressEventArgs e)
         {
 
         }
-
     }
+
 }

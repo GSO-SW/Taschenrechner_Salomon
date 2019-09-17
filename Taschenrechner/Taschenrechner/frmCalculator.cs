@@ -118,8 +118,17 @@ namespace Taschenrechner
 
             List<string> l = new List<string>(arr);
 
+            if (l.First() == "-")
+            {
+                l.RemoveAt(0);
+                l[0] = "-" + l[0];
+            }
+
+            if (IsOperator(l.Last()))
+                return false;
+
             //doppelte Minus und plus Entfernen oder austauschen
-            for(int i = 0; i < l.Count; i++)
+            for (int i = 0; i < l.Count; i++)
             {
                 if(l[i] == "-")
                 {
@@ -151,14 +160,7 @@ namespace Taschenrechner
                 }
             }
 
-            if(l.First() == "-")
-            {
-                l.RemoveAt(0);
-                l[0] = "-" + l[0];
-            }
-
-            if (IsOperator(l.Last()))
-                return false;
+           
 
             //wenn nicht alle elemente zahlen der operatoren sind, wird false zurück gegeben
             if (!arr.Any(x => IsNumber(x) || IsOperator(x)))

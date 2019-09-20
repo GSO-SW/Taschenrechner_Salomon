@@ -117,15 +117,26 @@ namespace Taschenrechner
 
         private string[] splitCalcString(string calcString)
         {
-            string[] calcArray = calcString.Split('+', '*', '-', '/');
-            //Debug
-            string debug = "";
-            for(int i=0;i < calcString.Length;i++)
+            string[] calcArray = new string[calcString.Length];
+            int counter = 0;
+            bool lastCharNmbr = false;
+            foreach (char c in calcString)
             {
-                debug += calcString[i];
-                debug += "|";
+                
+                if (c == '+' || c == '*' || c == '-' || c == '/')
+                {
+                    counter++;
+                    calcArray[counter] = c.ToString();
+                    counter++;
+                    lastCharNmbr = false;
+                }
+                else
+                {
+                    calcArray[counter] += c.ToString();
+                    lastCharNmbr = true;
+                }
             }
-            MessageBox.Show(debug);
+
             return calcArray;
         }
 

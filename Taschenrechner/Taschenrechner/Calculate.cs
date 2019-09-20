@@ -8,14 +8,11 @@ namespace Taschenrechner
 {
     class Calculate
     {
-        public Calculate(int nOne, char operand, int nTwo)
+        public Calculate()
         {
 
         }
 
-        //static int Add(int nOne, int nTwo)
-        //{
-        //    return null;
-        //}
+        static public string Calculate ()
     }
 }

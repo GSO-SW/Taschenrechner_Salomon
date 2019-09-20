@@ -197,6 +197,7 @@
             this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "=";
             this.btnSolve.UseVisualStyleBackColor = true;
+            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
             // btnPlus
             // 

@@ -166,10 +166,18 @@ namespace Taschenrechner
                 {
                     if (IsOperator(l[i - 1]))
                     {
-                        l.RemoveAt(i);
+                        if(i < l.Count - 1)
+                        {
+                            l.RemoveAt(i);
 
-                        if (i >= l.Count || (i < l.Count && (l[i] != "+" || l[i] != "-")))
+                            if (i >= l.Count || (i < l.Count && (l[i] != "+" || l[i] != "-")))
+                                return false;
+                        }
+                        else
+                        {
                             return false;
+                        }
+
                     }
                 }
             }
@@ -204,7 +212,9 @@ namespace Taschenrechner
                 }
             }
 
+
             arr = l.ToArray();
+            return true;
         }
 
         private bool IsOperator(string s)

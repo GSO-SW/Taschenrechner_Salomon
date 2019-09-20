@@ -110,7 +110,7 @@ namespace Taschenrechner
 
         }
 
-        private bool CheckCalcArray(string[] arr)
+        private bool CheckCalcArray(ref string[] arr)
         {
             //wenn nicht alle elemente zahlen der operatoren sind, wird false zurück gegeben
             if (!arr.Any(x => IsNumber(x) || IsOperator(x)))
@@ -134,7 +134,7 @@ namespace Taschenrechner
                 {
                     if (i < l.Count - 1)
                     {
-                        if(l[i+1] == "-")
+                        if (l[i + 1] == "-")
                         {
                             if (IsOperator(l[i - 1]))
                             {
@@ -147,6 +147,18 @@ namespace Taschenrechner
                                 l[i] = "+";
                             }
                         }
+                        else if(IsOperator(l[i - 1]))
+                        {
+                            if (IsNumber(l[i + 1]))
+                            {
+                                l.RemoveAt(i);
+                                l[i] = "-" + l[i];
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
                     }
                 }
 
@@ -155,8 +167,10 @@ namespace Taschenrechner
                     if (IsOperator(l[i - 1]))
                     {
                         l.RemoveAt(i);
-                    }
 
+                        if (i >= l.Count || (i < l.Count && (l[i] != "+" || l[i] != "-")))
+                            return false;
+                    }
                 }
             }
 
@@ -172,10 +186,25 @@ namespace Taschenrechner
                 {
                     if (IsOperator(l[i]))
                     {
+                        if(l[i] != "-")
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            l.RemoveAt(i);
 
+                            if (i < l.Count)
+                                l[i] = "-" + l[i];
+                            else
+                                return false;
+                        }
+                            
                     }
                 }
             }
+
+            arr = l.ToArray();
         }
 
         private bool IsOperator(string s)
